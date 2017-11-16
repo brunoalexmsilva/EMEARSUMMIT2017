@@ -1,0 +1,249 @@
+Determine the Data Type
+
+>>> type(98)
+<class 'int'>
+>>> type(98.6)
+<class 'float'>
+>>> type("Hi!")
+<class 'str'>
+>>> type(True)
+<class 'bool'>
+>>> type([1,2,3,4,5])
+<class 'list'>
+*********************************************
+Boolean Operators
+
+> 	Greater than
+< 	Less than
+== 	Equal to
+!= 	Not equal to
+>= 	Greater than or equal to
+<= 	Less than or equal to
+*********************************************
+ Concatenating String Variables
+
+>>> str1="Cisco"
+>>> str2="Networking"
+>>> str3="Academy"
+>>> space=" "
+>>> print(str1+space+str2+space+str3)
+Cisco Networking Academy
+*********************************************
+Converting a Variable's Value to a String
+
+>>> x=3
+>>> print("The value of x is " + x)
+ERROR
+>>> print("The value of x is " + str(x))
+*********************************************
+ Converting the Data Type of a Variable
+
+>>> x=3
+>>> type(x)
+<class 'int'>
+>>> x=str(x)
+>>> type(x)
+<class ‘str'>
+*********************************************
+Creating a List
+
+>>> hostnames=["R1","R2","R3","S1","S2"]
+>>> type(hostnames)
+<class 'list'>
+>>> len(hostnames)
+5
+>>> hostnames
+['R1', 'R2', 'R3', 'S1', 'S2']
+*********************************************
+Referencing and Manipulating a List
+
+>>> hostnames[0]
+'R1'
+>>> hostnames[-1]
+'S2'
+>>> hostnames[0]="RTR1"
+>>> hostnames
+['RTR1', 'R2', 'R3', 'S1', 'S2']
+>>> del hostnames[3]
+>>> hostnames
+['RTR1', 'R2', 'R3', 'S2']
+>>>
+*********************************************
+Creating a Dictionary
+
+>>> ipAddress = {"R1":"10.1.1.1","R2":"10.2.2.1","R3":"10.3.3.1"}
+>>> type(ipAddress)
+<class 'dict'>
+*********************************************
+Referencing and Modifying a Dictionary
+
+>>> ipAddress
+{'R1': '10.1.1.1', 'R2': '10.2.2.1', 'R3': '10.3.3.1'}
+>>> ipAddress['R1']
+'10.1.1.1’
+>>> ipAddress["S1"]="10.1.1.10"
+>>> ipAddress
+{'R1': '10.1.1.1', 'R2': '10.2.2.1', 'R3': '10.3.3.1', 'S1': '10.1.1.10'}
+>>> "R3" in ipAddress
+True
+>>>
+*********************************************
+Embedding a List in a Dictionary
+
+>>> ipAddress["R3"]=["10.3.3.1","10.3.3.2","10.3.3.3"]
+>>> ipAddress
+{'S1': '10.1.1.10', 'R2': '10.2.2.1', 'R1': '10.1.1.1', 'R3': ['10.3.3.1', '10.3.3.2', '10.3.3.3']}
+>>>
+*********************************************
+Accepting Input from the User
+
+>>> firstName = input("What is your first name? ")
+What is your first name? Bob
+>>> print("Hello " + firstName +"!")
+Hello Bob!
+>>>
+*********************************************
+The If/Else Function
+
+nativeVLAN = 1
+dataVLAN = 100
+if nativeVLAN == dataVLAN:
+ print("The native VLAN and the data VLAN are the same.")
+else:
+ print("The native VLAN and the data VLAN are different.")
+*********************************************
+The If/Elif/Else Function
+
+aclNum = int(input("What is the IPv4 ACL number? "))
+if aclNum >= 1 and aclNum <= 99:
+ print("This is a standard IPv4 ACL.")
+elif aclNum >=100 and aclNum <= 199:
+ print("This is a extended IPv4 ACL.")
+else:
+ print("This is not a standard or extended IPv4 ACL.")
+*********************************************
+For Loop
+
+>>> devices=["R1","R2","R3","S1","S2"]
+>>> for item in devices:
+ 	print(item) 
+R1
+R2
+R3
+S1
+S2
+>>> 
+*********************************************
+For Loop with Embedded If
+
+>>> for item in devices:
+        if "R" in item:
+                print(item)
+R1
+R2
+R3
+>>>
+*********************************************
+Use a For Loop to Create a New List
+
+>>> switches=[]
+>>> for item in devices:
+        if "S" in item:
+                switches.append(item)
+
+ 
+>>> switches
+['S1', 'S2']
+>>>
+*********************************************
+Counting Using a While Loop
+
+x=input("Enter a number to count to: ")
+x=int(x)
+y=1
+while y<=x:
+    print(y)
+    y=y+1
+*********************************************
+Add a While Loop to Check for Quit Command
+
+while True:
+    x=input("Enter a number to count to: ")
+    if x == 'q' or x == 'quit':
+        break
+
+    x=int(x)
+    y=1
+    while True:
+        print(y)
+        y=y+1
+        if y>x:
+            break
+*********************************************
+ Read and Print a File
+
+file=open("devices.txt","r")
+for item in file:
+    print(item)
+file.close()
+*********************************************
+Stripping the Blank Line
+
+file=open("devices.txt","r")
+for item in file:
+   item=item.strip()
+   print(item)
+file.close()
+*********************************************
+Copying a File into a List
+
+devices=[]
+file=open("devices.txt","r")
+for item in file:
+   item=item.strip()
+   devices.append(item)
+file.close()
+print(devices)
+*********************************************
+Add item to a file
+
+file=open("devices.txt","a")
+
+while True:
+    newitem=input("Enter device name: ")
+    if newitem=="exit":
+        print("All done!")
+        file.close()
+        break
+    else:
+        file.write(newitem + "\n")
+*********************************************
+
+Last exercise
+
+import urllib.parse
+import requests
+
+main_api = 'https://maps.googleapis.com/maps/api/geocode/json?'
+address = 'san jose'
+key = 'AIzaSyAwP_WJSMYC73kgFTo4oJHMl1hI4JZXTUo'
+
+while True:
+    address = input('Address: ')
+    if address == 'quit' or address == 'q':
+        break
+
+    url = main_api + urllib.parse.urlencode({'address': address}) + '&key=' + key
+    print(url)
+
+    json_data = requests.get(url).json()
+    json_status = json_data['status']
+    print('API Status: ' + json_status +'\n')
+
+    if json_status == 'OK':
+        for each in json_data['results'][0]['address_components']:
+            print(each['long_name'])
+        
+        formatted_address = json_data['results'][0]['formatted_address']
+        print('\n' + formatted_address)
+
